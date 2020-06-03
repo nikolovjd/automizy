@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  db:
+    image: percona
+    ports:
+      - 3308:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: app
+#    volumes:
+#      - ./migrations:/docker-entrypoint-initdb.d/

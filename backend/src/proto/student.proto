@@ -1,0 +1,25 @@
+syntax = "proto3";
+package student;
+
+service StudentService {
+   rpc List (Empty) returns (StudentList) {}
+   rpc Create (Student) returns (Student) {}
+   rpc Read (StudentRequestId) returns (Student) {}
+   rpc Update (Student) returns (Empty) {}
+   rpc Delete (StudentRequestId) returns (Empty) {}
+}
+message Empty {}
+message Student {
+   string id = 1;
+   string first_name = 2;
+   string last_name = 3;
+   string email = 4;
+   string createdAt = 5;
+   string updatedAt = 6;
+}
+message StudentList {
+   repeated Student students = 1;
+}
+message StudentRequestId {
+   string id = 1;
+}

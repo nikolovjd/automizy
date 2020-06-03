@@ -1,0 +1,35 @@
+.layout  {
+    height: 100%;
+}
+.sider {
+    overflow: hidden;
+}
+.header {
+    background: #fff;
+    padding-left: 20px;
+    padding-top: 10px;
+    line-height: 50px;
+}
+.toggle {
+    font-size: 18px;
+    width: 44px;
+    cursor: pointer;
+    transition: color 0.3s;
+    float: left;
+}
+.toggle:hover {
+    color: #1890ff;
+}
+.logo, .logo-hide {
+    height: 32px;
+    margin: 16px;
+}
+.logo-hide {
+    padding-left: 15px;
+}
+.content {
+    background: #fff;
+    margin: 24px 16px;
+    padding: 24px;
+    min-height: 280px;
+}
