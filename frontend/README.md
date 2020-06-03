@@ -1,8 +1,10 @@
 # Automizy Dev Test
 ## Frontend
 ### Alapkövetelmény
-npm 6.14.4 
+npm 6.14.4
+
 node v12.16.3
+
 ### Függőségek telepítése
 ``` 
 yarn install
