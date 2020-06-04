@@ -17,11 +17,11 @@ yarn install
 yarn start:rest
 ``` 
 #### Használat
-Postman-el: \
-Importáld be: backend/postman/ExpressMicro.postman_collection.json \
-Majd: \
-  Collection: ExpressMicro \
-  Folder: calc
+Postman-el: <br />
+Importáld be: backend/postman/AutomizyDevTest.postman_collection.json <br />
+Majd: <br />
+  Collection: AutomizyDevTest <br />
+  Folder: student <br />
 
 #### microservice réteg futtatása [Terminal 2]
 
