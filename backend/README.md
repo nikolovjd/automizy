@@ -32,6 +32,3 @@ Majd:
 ```
 yarn start:micro:student
 ```
-```
-yarn start:micro:project
-```
