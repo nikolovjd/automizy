@@ -1,6 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import { Layout, Row, Col, Spin, Empty, List, Typography, Button, Modal, message } from 'antd'
+import { 
+    Layout, 
+    Row, 
+    Col, 
+    Spin, 
+    Empty, 
+    List, 
+    Typography, 
+    Button, 
+    Modal, 
+    message,
+    Form, 
+    Input } from 'antd'
 const { Title } = Typography
 const { Header, Content } = Layout
 const { confirm } = Modal
@@ -8,11 +20,19 @@ import { ExclamationCircleOutlined } from '@ant-design/icons'
 import "../../layout/Layout.css"
 
 const Student=()=>{
-    const [reloadList, setReloadList] = useState(null)
-    // Új tanuló hozzáadása
+    const [reloadListTrigger, setReloadListTrigger] = useState(null)
+    const [showModal, setShowModal] = useState(false)
+    // Új tanuló hozzáadása gombra kattintás
     const onClickAddNewStudent=()=>{
-        console.log('yolo')
-        setReloadList(new Date().getTime())
+        setShowModal(true)
+    }
+    const onClickCancel=()=>{
+        setShowModal(false)
+    }
+    const onDone=({name})=>{
+        setShowModal(false)
+        setReloadListTrigger(new Date().getTime())
+        message.success('The following student has been saved: ' + name)
     }
     return(
         <Layout>
@@ -31,14 +51,16 @@ const Student=()=>{
                 </Row>
             </Header>
             <Content className="content">
-                <ListStudent reload={reloadList}/>
+                <ListStudent reloadListTrigger={reloadListTrigger}/>
+                <AddStudentModal visible={showModal} onClickCancel={onClickCancel} onDone={onDone}/>
             </Content>
         </Layout>
     )
 }
 
-const ListStudent =({reload})=>{
-    const [trigger, setTrigger] = useState(reload)
+// Tanulók listázása
+const ListStudent =({reloadListTrigger})=>{
+    const [trigger, setTrigger] = useState()
     const [loader, setLoader] = useState(true)
 
     const [list, setList] = useState({
@@ -75,7 +97,7 @@ const ListStudent =({reload})=>{
                 }
             )
         },
-        [trigger]
+        [trigger, reloadListTrigger]
     )
     // Adott tanuló törlésére kattinttás
     const onClickDeleteStudent=({name, id})=>{
@@ -140,6 +162,104 @@ const ListStudent =({reload})=>{
             </Col>
         </Row>
     </Spin>
+    )
+}
+// Új tanuló felvitele
+const AddStudentModal=({
+    visible,
+    onClickCancel,
+    onDone
+})=>{
+    const [form] = Form.useForm()
+
+    const onClickSave=()=>{
+        form
+        .validateFields()
+        .then(values => {
+            saveStudent({
+                first_name: values.first_name,
+                last_name: values.last_name,
+                email: values.email
+            })
+        })
+        .catch(info => {
+            console.log('Validate Failed:', info)
+        })
+    }
+    // Tanuló mentése
+    const saveStudent = ({first_name, last_name, email}) => {
+        axios.post('api/student',{
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email
+        })
+        .then(()=>{
+            form.resetFields()
+            onDone({name: first_name + ' ' + last_name})
+        })
+        .catch((err)=>{
+            if (err.response.status === 409) {
+                setDuplicationErrorMessage({name: err.response.data.error})
+            } else {
+            }
+        })
+    }
+    const setDuplicationErrorMessage = ({name}) => {
+        console.log(name)
+        form.setFields([
+            {
+                name: Object.keys(name)[0],
+                errors: ["Alredy exists"]
+            }
+        ])
+    }
+    return(
+        <Modal
+            visible={visible}
+            title="Add new student"
+            onCancel={onClickCancel}
+            footer={[
+                <Button key="cancel" onClick={onClickCancel}>
+                    Cancel
+                </Button>,
+                <Button key="save" type="primary" onClick={onClickSave}>
+                    Save
+                </Button>
+            ]}
+            >
+            <Form
+                form={form}
+                layout="vertical"
+                >
+                <Form.Item
+                    label={'First name'}
+                    name="first_name"
+                    rules={[{required: true, message: 'Please type student first name!'}]}
+                >
+                    <Input
+                        autoComplete='off'
+                        placeholder="First name"/>
+                </Form.Item>
+                <Form.Item
+                    label={'Last name'}
+                    name="last_name"
+                    rules={[{required: true, message: 'Please type student last name!'}]}
+                >
+                    <Input
+                        autoComplete='off'
+                        placeholder="Last name"/>
+                </Form.Item>
+                <Form.Item
+                    label={'Email address'}
+                    name="email"
+                    rules={[{required: true, message: 'Please type student email address!'}]}
+                >
+                    <Input
+                        autoComplete='off'
+                        placeholder="Email address"/>
+                </Form.Item>
+            </Form>
+        </Modal>
     )
 }
 export default Student
