@@ -17,11 +17,15 @@ yarn install
 yarn start:rest
 ``` 
 #### Használat
-Postman-el: <br />
-Importáld be: backend/postman/AutomizyDevTest.postman_collection.json <br />
-Majd: <br />
-  Collection: AutomizyDevTest <br />
-  Folder: student <br />
+Postman-el:
+
+Importáld be: backend/postman/AutomizyDevTest.postman_collection.json
+
+Majd:
+
+  Collection: AutomizyDevTest
+  
+  Folder: student
 
 #### microservice réteg futtatása [Terminal 2]
 
