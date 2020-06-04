@@ -1,4 +1,9 @@
+# Automizy Dev Test
+## Adatbázis
+### Alapkövetelmény
+Docker 19.03.9
 
+### Függőségek telepítése
 https://docs.docker.com/compose/install/
 
 ```
@@ -7,15 +12,12 @@ curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compo
 ```
 chmod +x /usr/local/bin/docker-compose
 ```
+
+### Adatbázis konténer indítása
 ```
-$ docker images
+docker-compose up
 ```
-```
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-```
-```
-$ docker-compose up
-```
+### Futás ellenörzése
 ```
 docker images
 ```

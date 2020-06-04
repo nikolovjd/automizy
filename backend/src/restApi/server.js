@@ -1,8 +1,16 @@
 import express from 'express'
 import router from './route/router'
+import cors from 'cors'
 
 const app = express()
 const port = process.env.PORT || 3000
+
+app.use(  
+   cors({
+      origin: "http://localhost:8080", // restrict calls to those this address
+      methods: "GET, POST, OPTIONS, PUT, PATCH, DELETE" // only allow GET requests
+   })
+)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

@@ -132,7 +132,7 @@ exports.update = async (req, res, next) => {
             "last_name": req.body.last_name,
             "email": req.body.email
         })
-        res.status(200).json()
+        res.status(200).json({id: req.params.id})
     } catch(e){
         if(e.details === 'Not found'){
             res.status(204).json(e)
@@ -157,7 +157,7 @@ exports.delete = async (req, res, next) => {
         let result = await studentDelete({
             "id": req.params.id
         })
-        res.status(200).json(req.params.id)
+        res.status(200).json({id: req.params.id})
     } catch(e){
         if(e.details === 'Not found'){
             res.status(204).json(e)

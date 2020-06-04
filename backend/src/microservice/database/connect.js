@@ -14,7 +14,8 @@ const sequelize = new Sequelize(
             min: config.database.pool.min,
             acquire: config.database.pool.acquire,
             idle: config.database.pool.idle
-        }
+        },
+        logging: config.database.logging
     }
 )
 
