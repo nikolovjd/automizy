@@ -7,6 +7,7 @@ service ProjectService {
   rpc Read (ProjectRequestId) returns (Project) {}
   rpc Update (Project) returns (Empty) {}
   rpc Delete (ProjectRequestId) returns (Empty) {}
+  rpc Hydrate (ProjectsRequestIds) returns (ProjectList) {}
 }
 message Empty {}
 message Project {
@@ -21,4 +22,7 @@ message ProjectList {
 }
 message ProjectRequestId {
   string id = 1;
+}
+message ProjectsRequestIds {
+  repeated string ids = 1;
 }

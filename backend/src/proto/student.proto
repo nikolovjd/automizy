@@ -7,6 +7,7 @@ service StudentService {
    rpc Read (StudentRequestId) returns (Student) {}
    rpc Update (Student) returns (Empty) {}
    rpc Delete (StudentRequestId) returns (Empty) {}
+   rpc Hydrate (StudentsRequestIds) returns (StudentList) {}
 }
 message Empty {}
 message Student {
@@ -22,4 +23,7 @@ message StudentList {
 }
 message StudentRequestId {
    string id = 1;
+}
+message StudentsRequestIds {
+   repeated string ids = 1;
 }

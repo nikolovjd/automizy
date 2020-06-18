@@ -200,7 +200,6 @@ const AddProjectModal=({
             })
     }
     const setDuplicationErrorMessage = ({name}) => {
-        console.log(name)
         form.setFields([
             {
                 name: Object.keys(name)[0],
