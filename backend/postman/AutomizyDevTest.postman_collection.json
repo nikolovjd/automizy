@@ -254,7 +254,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Changed Name Project\",\r\n    \"desc\": \"Another description\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Changed Name Project\",\r\n    \"desc\": \"fu\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -262,7 +262,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/api/project/1",
+							"raw": "localhost:3000/api/project/8",
 							"host": [
 								"localhost"
 							],
@@ -270,7 +270,7 @@
 							"path": [
 								"api",
 								"project",
-								"1"
+								"8"
 							]
 						}
 					},
@@ -291,6 +291,89 @@
 								"api",
 								"project",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "management",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/management",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"management"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\": 1,\n    \"studentId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/management/add",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"management",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\": 1,\n    \"studentId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/management/remove",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"management",
+								"remove"
 							]
 						}
 					},

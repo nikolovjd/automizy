@@ -1,0 +1,42 @@
+syntax = "proto3";
+package management;
+
+service ManagementService {
+   rpc List (Empty) returns (ProjectList) {}
+   rpc Add (ProjectStudentId) returns (Empty) {}
+   rpc Remove (ProjectStudentId) returns (Empty) {}
+}
+
+/*
+  I should be able to import existing messages and extend them (probably?) but I don't have enough exp with grpc and
+  was having some issues doing so.
+ */
+
+message Empty {}
+
+message ProjectStudentId {
+   string projectId = 1;
+   string studentId = 2;
+}
+
+message Student {
+   string id = 1;
+   string first_name = 2;
+   string last_name = 3;
+   string email = 4;
+   string createdAt = 5;
+   string updatedAt = 6;
+}
+
+message Project {
+   string id = 1;
+   string name = 2;
+   string desc = 3;
+   string createdAt = 4;
+   string updatedAt = 5;
+   repeated Student students = 6;
+}
+
+message ProjectList {
+   repeated Project projects = 1;
+}

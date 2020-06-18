@@ -134,6 +134,22 @@ const Delete = async (call, callback) => {
         })
     }
 }
+// Implement the hydrate function
+const Hydrate = async (call, callback) => {
+    const Op = db.DataType.Op
+    const ids = call.request.ids
+    try {
+        let result = await projectModel.findAll({ where: { "id": {[Op.in]: ids} } })
+        if(result){
+            callback(null, {projects: result})
+        }
+    } catch(err) {
+        callback({
+            code: grpc.status.ABORTED,
+            details: "Aborted"
+        })
+    }
+}
 // Collect errors
 const dbErrorCollector=({
     errors
@@ -149,7 +165,8 @@ const exposedFunctions = {
     Create,
     Read,
     Update,
-    Delete
+    Delete,
+    Hydrate
 }
 
 server.addService(projectProto.ProjectService.service, exposedFunctions)
