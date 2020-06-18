@@ -1,14 +1,14 @@
 module.exports={
     student: {
-        'host': '0.0.0.0',
+        'host': 'student',
         'port': 50053
     },
     project: {
-        'host': '0.0.0.0',
+        'host': 'project',
         'port': 50054
     },
     management: {
-        'host': '0.0.0.0',
+        'host': 'management',
         'port': 50055
     }
 }

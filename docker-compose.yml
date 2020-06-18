@@ -1,0 +1,51 @@
+version: '3.3'
+
+services:
+  management:
+    restart: always
+    build: backend
+    container_name: management_ms
+    networks:
+      - automizy
+    entrypoint: ["/usr/local/bin/npm", "run", "start:micro:management"]
+  student:
+    restart: always
+    build: backend
+    container_name: student_ms
+    networks:
+      - automizy
+    entrypoint: ["/usr/local/bin/npm", "run", "start:micro:student"]
+  project:
+    restart: always
+    build: backend
+    container_name: project_ms
+    networks:
+      - automizy
+    entrypoint: ["/usr/local/bin/npm", "run", "start:micro:project"]
+  rest:
+    restart: always
+    build: backend
+    container_name: rest_ms
+    ports:
+      - 3000:3000
+    networks:
+      - automizy
+    entrypoint: ["/usr/local/bin/npm", "run", "start:rest"]
+  db:
+    image: percona
+    ports:
+      - 3308:3306
+    restart: always
+    expose:
+      - 3308
+    networks:
+      - automizy
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: app
+
+networks:
+  automizy:
+    driver: bridge
